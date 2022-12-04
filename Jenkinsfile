@@ -29,16 +29,15 @@ pipeline {
         }
         stage('push to nexus') {
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'SampleWebApp', classifier: '', file: 'SampleWebApp/target/SampleWebApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'SampleWebApp', nexusUrl: 'ec2-34-228-41-4.compute-1.amazonaws.com:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'
-    
+              
+                   nexusArtifactUploader artifacts: [[artifactId: 'SampleWebApp', classifier: '', file: 'SampleWebApp/target/SampleWebApp.war', type: 'war']], credentialsId: 'nexus', groupId: 'SampleWebApp', nexusUrl: '44.195.90.184:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshot', version: '1.0-SNAPSHOT'
             }
             
         }
         
         stage('deploy to tomcat') {
           steps {
-              deploy adapters: [tomcat9(credentialsId: 'tomcat-cred', path: '', url: 'http://ec2-52-23-235-182.compute-1.amazonaws.com:8080/')], contextPath: 'realcloud', war: '**/*.war'
-              
+              deploy adapters: [tomcat9(credentialsId: 'tomcat-cred', path: '', url: 'http://44.192.2.16:8080/')], contextPath: 'realcloud', war: '"**/*.war"'
           }
             
         }
