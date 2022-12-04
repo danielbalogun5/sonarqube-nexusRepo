@@ -37,7 +37,7 @@ pipeline {
         
         stage('deploy to tomcat') {
           steps {
-              deploy adapters: [tomcat9(credentialsId: 'tomcat-cred', path: '', url: 'http://44.192.2.16:8080/')], contextPath: 'realcloud', war: '"**/*.war"'
+              deploy adapters: [tomcat9(credentialsId: 'tomcat-cred', path: '', url: 'http://44.192.2.16:8080/')], contextPath: 'realcloud', war: '**/*.war'
           }
             
         }
